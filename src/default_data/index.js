@@ -1,11 +1,12 @@
 module.exports = [
     {
         name: 'navbar_simple',
+        category: 'navbar',
         storeName: {
-            en: "navigation bar"
+            en: "Navigation Bar"
         },
         storeDesc: {
-            en: "navigation bar"
+            en: "Navigation Bar"
         }
     }
 ]

@@ -7,7 +7,8 @@
     <div class="navbar_A" ww-fixed>
         <div class="placeholder" v-if="section.data.appearPercent == null">
             <!-- wwManager:start -->
-            <div class="placeholder-infos">Placeholder for navbar_A
+            <div class="placeholder-infos">
+                Placeholder for navbar_A
                 <br>Place navbar_A on top of the section list to hide this
             </div>
             <!-- wwManager:end -->
@@ -92,6 +93,9 @@ export default {
             window.addEventListener('resize', this.onResize);
 
             wwLib.$on('wwNavbar:toggle', this.toggleNavbar);
+
+            this.onResize();
+
         },
 
         /*=============================================m_ÔÔ_m=============================================\
@@ -140,9 +144,11 @@ export default {
 
             let scrollPercent = Math.max(0, 100 * scrollTop / this.windowHeight) - 0.0001;
 
+            /*
             if (this.windowHeight + scrollTop >= document.body.clientHeight) {
                 scrollPercent = 99999999;
             }
+            */
 
             this.show = scrollPercent >= this.section.data.appearPercent;
         },

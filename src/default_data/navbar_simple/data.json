@@ -911,7 +911,7 @@
         "uniqueId": 1915629072,
         "wwVersion": 3
     },
-    "appearPercent": 50,
+    "appearPercent": -2,
     "backgroundSide": {
         "new": false,
         "anim": {},

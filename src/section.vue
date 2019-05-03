@@ -138,7 +138,11 @@ export default {
             const g = document.getElementsByTagName('body')[0];
             this.windowHeight = window.innerHeight || e.clientHeight || g.clientHeight;
 
-            this.setScrollPercent();
+            if (this.section.data.appearPercent == -2) {
+                this.setScrollUp();
+            } else {
+                this.setScrollPercent();
+            }
         },
         setScrollPercent() {
             if (this.section.data.appearPercent == null) {

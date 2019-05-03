@@ -76,7 +76,8 @@ export default {
         return {
             windowHeight: 0,
             show: false,
-            navbarOpen: false
+            navbarOpen: false,
+            lastScrollTop: 0
         }
     },
     computed: {
@@ -125,7 +126,12 @@ export default {
           SHOW / HIDE NAVBAR TOP
         \================================================================================================*/
         onScroll() {
-            this.setScrollPercent();
+            if (this.section.data.appearPercent == -2) {
+                this.setScrollUp();
+            } else {
+                this.setScrollPercent();
+            }
+
         },
         onResize() {
             const e = document.documentElement;
@@ -151,6 +157,17 @@ export default {
             */
 
             this.show = scrollPercent >= this.section.data.appearPercent;
+        },
+        setScrollUp() {
+
+            const lastScrollTop = this.lastScrollTop || 0
+            const scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+
+            const scrollPercent = Math.max(0, 100 * scrollTop / this.windowHeight) - 0.0001;
+
+            this.show = scrollPercent < lastScrollTop
+
+            this.lastScrollTop = scrollPercent
         },
 
         /*=============================================m_ÔÔ_m=============================================\

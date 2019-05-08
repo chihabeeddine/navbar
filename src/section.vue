@@ -169,7 +169,8 @@ export default {
 
             const scrollPercent = Math.max(0, 100 * scrollTop / this.windowHeight) - 0.0001;
 
-            this.show = scrollPercent < lastScrollTop
+            console.log(lastScrollTop)
+            this.show = (lastScrollTop > 5) ? scrollPercent < lastScrollTop : false
 
             this.lastScrollTop = scrollPercent
         },

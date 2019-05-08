@@ -13,7 +13,7 @@
             </div>
             <!-- wwManager:end -->
         </div>
-        <div class="navbar-top" :class="{'show': show, 'no-anim': section.data.appearPercent == null}">
+        <div class="navbar-top" :class="{'show': show, 'no-anim': section.data.appearPercent == null, 'fixed-nav': section.data.appearPercent == -3}">
             <div class="container">
                 <!-- wwManager:start -->
                 <wwSectionEditMenu size="small" :sectionCtrl="sectionCtrl" :options="openOptions"></wwSectionEditMenu>
@@ -315,18 +315,22 @@ $navbar-width: 400px;
             display: block;
         }
     }
-
     .navbar-top {
         width: 100%;
-        position: fixed;
+        // position: fixed;
         top: 0;
         z-index: 101;
 
         transition: transform 0.3s ease;
-        transform: translateY(calc(-100% - 10px));
+        // transform: translateY(calc(-100% - 10px));
 
         &.show {
             transform: translateY(0);
+        }
+
+        &.fixed-nav {
+            position: fixed;
+            transform: translateY(calc(-100% - 10px));
         }
 
         .container {

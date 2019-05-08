@@ -7,6 +7,14 @@ module.exports = [
         },
         storeDesc: {
             en: "Navigation Bar"
+        },
+        name: 'gt_navbar',
+        category: 'navbar',
+        storeName: {
+            en: "gt_navbar"
+        },
+        storeDesc: {
+            en: "gt_navbar"
         }
     }
 ]

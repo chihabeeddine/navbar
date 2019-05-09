@@ -128,6 +128,8 @@ export default {
         onScroll() {
             if (this.section.data.appearPercent == -2) {
                 this.setScrollUp();
+            } else if (this.section.data.appearPercent == -3) {
+                this.show = false;
             } else {
                 this.setScrollPercent();
             }

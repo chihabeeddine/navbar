@@ -8,8 +8,8 @@
         "fr": "En pourcentage (%) de la hauteur du navigateur."
     },
     "scrollDesc2": {
-        "en": "Use '-1%' to always show the navbar.",
-        "fr": "Utilisez '-1%' pour toujours afficher la barre de navigation."
+        "en": "Use : <br> '-1%' to always show the navbar. <br>'-2%' to show the navbar when scrolling up. <br>'-3%' to let the navbar on top of the page. ",
+        "fr": "Utilisez : <br> '-1%' pour toujours afficher la barre de navigation. <br> '-2%' pour afficher la barre de navigation lors d'un déplacement vertical. <br> '-3% pour laisser la barre de navigation en haut de la page.'"
     },
     "percent": {
         "en": "Percent - %",

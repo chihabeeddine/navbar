@@ -28,9 +28,9 @@
             <!-- <div class="menu-wrapper">
                 <wwObject tag="div" :ww-object="section.data.dropDownMenu"></wwObject>
             </div>-->
-            <!-- <div class="lang-wrapper">
+            <div class="lang-wrapper">
                 <wwObject tag="div" :ww-object="section.data.languageButton"></wwObject>
-            </div>-->
+            </div>
         </div>
 
         <div class="navbar-side">
@@ -116,19 +116,7 @@ export default {
         /*=============================================m_ÔÔ_m=============================================\
           TOGGLE NAVBAR SIDE
         \================================================================================================*/
-        /*     toggleNavbar() {
-                this.navbarOpen = !this.navbarOpen;
-                if (this.navbarOpen) {
-                    for (let container of this.$el.querySelectorAll('.container-up')) {
-                        container.classList.add('navbar_A-open');
-                    }
-                }
-                else {
-                    for (let container of this.$el.querySelectorAll('.container-up')) {
-                        container.classList.remove('navbar_A-open');
-                    }
-                }
-            }, */
+
         toggleNavbar() {
             this.navbarOpen = !this.navbarOpen;
             if (this.navbarOpen) {
@@ -263,13 +251,13 @@ export default {
             this.section.data.rowsSide = [];
             needUpdate = true;
         }
-        /*     if (!this.section.data.languageButton) {
-                this.section.data.languageButton = wwLib.wwObject.getDefault({ type: 'ww-lang-ouispoon', data: {} });
-            } */
-        /*  if (!this.section.data.dropDownMenu) {
-             this.section.data.dropDownMenu = wwLib.wwObject.getDefault({ type: 'ww-dropdown-menu', data: {} });
- 
-         } */
+        if (!this.section.data.languageButton) {
+            this.section.data.languageButton = wwLib.wwObject.getDefault({ type: 'ww-lang-ouispoon', data: {} });
+        }
+        /*   if (!this.section.data.dropDownMenu) {
+              this.section.data.dropDownMenu = wwLib.wwObject.getDefault({ type: 'ww-dropdown-menu', data: {} });
+  
+          } */
 
         if (!this.section.data.background) {
             this.section.data.background = wwLib.wwObject.getDefault({ type: 'ww-color', data: { backgroundColor: '#FFFFFF' } });

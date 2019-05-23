@@ -25,15 +25,29 @@
                     <wwObject v-for="row in section.data.rows" :key="row.uniqueId" :ww-object="row"></wwObject>
                 </wwLayoutColumn>
             </div>
+            <!-- <div class="menu-wrapper">
+                <wwObject tag="div" :ww-object="section.data.dropDownMenu"></wwObject>
+            </div>-->
+            <!-- <div class="lang-wrapper">
+                <wwObject tag="div" :ww-object="section.data.languageButton"></wwObject>
+            </div>-->
         </div>
+
         <div class="navbar-side">
-            <div class="container">
+            <div class="container-up">
                 <!-- wwManager:start -->
                 <wwSectionEditMenu size="small" :sectionCtrl="sectionCtrl" :options="openOptions"></wwSectionEditMenu>
                 <!-- wwManager:end -->
                 <wwObject class="background" :ww-object="section.data.backgroundSide" ww-category="background"></wwObject>
 
-                <wwLayoutColumn tag="div" ww-default="ww-row" :ww-list="section.data.rowsSide" class="content" @ww-add="add(section.data.rowsSide, $event)" @ww-remove="remove(section.data.rowsSide, $event)">
+                <wwLayoutColumn
+                    tag="div"
+                    ww-default="ww-row"
+                    :ww-list="section.data.rowsSide"
+                    class="content"
+                    @ww-add="add(section.data.rowsSide, $event)"
+                    @ww-remove="remove(section.data.rowsSide, $event)"
+                >
                     <wwObject v-for="row in section.data.rowsSide" :key="row.uniqueId" :ww-object="row"></wwObject>
                 </wwLayoutColumn>
             </div>
@@ -102,23 +116,39 @@ export default {
         /*=============================================m_ÔÔ_m=============================================\
           TOGGLE NAVBAR SIDE
         \================================================================================================*/
+        /*     toggleNavbar() {
+                this.navbarOpen = !this.navbarOpen;
+                if (this.navbarOpen) {
+                    for (let container of this.$el.querySelectorAll('.container-up')) {
+                        container.classList.add('navbar_A-open');
+                    }
+                }
+                else {
+                    for (let container of this.$el.querySelectorAll('.container-up')) {
+                        container.classList.remove('navbar_A-open');
+                    }
+                }
+            }, */
         toggleNavbar() {
             this.navbarOpen = !this.navbarOpen;
             if (this.navbarOpen) {
                 for (let section of document.querySelectorAll('.ww-section:not([ww-fixed])')) {
                     section.classList.add('navbar_A-open');
                 }
-                for (let container of this.$el.querySelectorAll('.container')) {
+                for (let container of this.$el.querySelectorAll('.container-up')) {
                     container.classList.add('navbar_A-open');
+
                 }
+                this.$el.querySelector('.container').classList.add('navbar_A-open');
             }
             else {
                 for (let section of document.querySelectorAll('.ww-section:not([ww-fixed])')) {
                     section.classList.remove('navbar_A-open');
                 }
-                for (let container of this.$el.querySelectorAll('.container')) {
+                for (let container of this.$el.querySelectorAll('.container-up')) {
                     container.classList.remove('navbar_A-open');
                 }
+                this.$el.querySelector('.container').classList.remove('navbar_A-open');
             }
         },
 
@@ -197,7 +227,6 @@ export default {
             }
 
             try {
-
                 const result = await wwLib.wwPopups.open(options)
 
                 if (typeof (result.navbarAPercent) !== 'undefinded') {
@@ -205,7 +234,6 @@ export default {
                     this.sectionCtrl.update(this.section);
                     this.onScroll();
                 }
-
             } catch (error) {
 
             }
@@ -235,6 +263,13 @@ export default {
             this.section.data.rowsSide = [];
             needUpdate = true;
         }
+        /*     if (!this.section.data.languageButton) {
+                this.section.data.languageButton = wwLib.wwObject.getDefault({ type: 'ww-lang-ouispoon', data: {} });
+            } */
+        /*  if (!this.section.data.dropDownMenu) {
+             this.section.data.dropDownMenu = wwLib.wwObject.getDefault({ type: 'ww-dropdown-menu', data: {} });
+ 
+         } */
 
         if (!this.section.data.background) {
             this.section.data.background = wwLib.wwObject.getDefault({ type: 'ww-color', data: { backgroundColor: '#FFFFFF' } });
@@ -244,6 +279,7 @@ export default {
             this.section.data.backgroundSide = wwLib.wwObject.getDefault({ type: 'ww-color', data: { backgroundColor: '#FFFFFF' } });
             needUpdate = true;
         }
+
 
 
         if (needUpdate) {
@@ -265,7 +301,7 @@ export default {
 
 <style lang="scss">
 .navbar_A-open {
-    transform: translateX(-200px);
+    transform: translateY(-20px);
 }
 
 .ww-section:not([ww-fixed]) {
@@ -274,7 +310,16 @@ export default {
 </style>
 
 <style scoped lang="scss">
-$navbar-width: 400px;
+.lang-wrapper {
+    position: absolute;
+    right: 300px;
+    margin-top: 100px;
+}
+.menu-wrapper {
+    position: absolute;
+    right: 100px;
+    margin-top: 50px;
+}
 
 .navbar_A {
     width: 100%;
@@ -334,9 +379,8 @@ $navbar-width: 400px;
             width: 100%;
             height: 70px;
             transition: transform 0.3s ease;
-
             &.navbar_A-open {
-                transform: translateX(-$navbar-width);
+                transform: translateY(-20px);
             }
 
             &.no-anim {
@@ -358,19 +402,26 @@ $navbar-width: 400px;
 
     .navbar-side {
         position: fixed;
-        top: 0;
-        left: 100%;
-        width: $navbar-width;
+        top: 100%;
+        //top: 0;
+        left: 0;
+        width: 100%;
         z-index: 101;
         height: 100%;
 
-        .container {
+        .container-up {
             width: 100%;
-            height: 100%;
-            transition: transform 0.3s ease;
+            height: calc(100% + 2px);
+            transition: all 0.3s ease;
+            transform: translateY(-50%);
+            opacity: 0;
+            visibility: hidden;
 
             &.navbar_A-open {
-                transform: translateX(-$navbar-width);
+                transform: translateY(calc(-100% + 1px));
+
+                opacity: 1;
+                visibility: visible;
             }
 
             .background {
@@ -383,6 +434,10 @@ $navbar-width: 400px;
 
             .content {
                 position: relative;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                pointer-events: all;
+                height: 100%;
             }
 
             .edit-menu-container {
